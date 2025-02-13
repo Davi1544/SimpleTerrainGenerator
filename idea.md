@@ -2,4 +2,4 @@ This project aims to create a simple terrain generator inspired by Wave Function
 
 # Use
 
-Given two positive integers M and N, an M by N tiles terrain image will be produced 
+Given two positive integers M and N, an M by N tiles terrain image will be produced (M lines and N columns)
