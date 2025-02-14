@@ -2,6 +2,8 @@ from SimpleTerrainGenerator.simple.cell import *
 from random import randint
 import time
 import os
+from PIL import Image
+import numpy as np
 
 # sample
 import SimpleTerrainGenerator.simple.sample1 as smp
@@ -121,12 +123,30 @@ def main(M : int, N : int, timeLapse : bool = False) -> None:
 
         if timeLapse:
             printBoard(board, M, N)
-            time.sleep(.2)
+            time.sleep(.1)
             os.system("cls")
 
-    printBoard(board, M, N)
+    idBoard = {c:board[c].tile for c in board}
+    # 7.
+    #im = Image.fromarray(np.uint8(myarray1)).convert('RGB')
+    #im.save("kdkmdf.png")
 
+    picsAsListsById = {}
+    for imagePathId in smp.images:
+        if imagePathId == 0: continue
+        picsAsListsById[imagePathId] = np.array(Image.open(smp.images[imagePathId])).tolist()
+
+    finalImage = []
+    # TEM UMA FÓRMULA PARA O PIXEL FINAL, CERTEZA
+    for i in range(M*16):
+        line = []
+        for j in range(N*16):
+            line.append(picsAsListsById[idBoard[(i//16, j//16)]][i%16][j%16])
+        finalImage.append(line)
+
+    im = Image.fromarray(np.uint8(finalImage)).convert('RGB')
+    im.save("save.png")
 
 # if main
 if __name__ == "__main__":
-    main(20,20,False)
+    main(34,22,False)
