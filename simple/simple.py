@@ -136,8 +136,8 @@ def main(M : int, N : int, timeLapse : bool = False) -> None:
         if imagePathId == 0: continue
         picsAsListsById[imagePathId] = np.array(Image.open(smp.images[imagePathId])).tolist()
 
+    # creating final image
     finalImage = []
-    # TEM UMA FÓRMULA PARA O PIXEL FINAL, CERTEZA
     for i in range(M*16):
         line = []
         for j in range(N*16):
@@ -145,8 +145,8 @@ def main(M : int, N : int, timeLapse : bool = False) -> None:
         finalImage.append(line)
 
     im = Image.fromarray(np.uint8(finalImage)).convert('RGB')
-    im.save("save.png")
+    im.save("saveSimple.png")
 
 # if main
 if __name__ == "__main__":
-    main(34,22,False)
+    main(30,30,False)
